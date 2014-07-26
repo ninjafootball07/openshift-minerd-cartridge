@@ -1,5 +1,7 @@
 Name: minerd
 Cartridge-Short-Name: MINERD
+Display-Name: FooBar
+Description: pffff
 Version: '0.1'
 Cartridge-Version: '0.0.1'
 Cartridge-Vendor: foobar
