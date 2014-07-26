@@ -27,8 +27,8 @@ function start() {
   if isrunning; then
       echo "Application is already running"
   else
-      pushd ${OPENSHIFT_CPUMINER_DIR}/minerd
-      bin minerd --help
+      pushd ${OPENSHIFT_CPUMINER_DIR}cpuminer
+      bin/minerd --benchmark > ${OPENSHIFT_TMP_DIR}/${cartridge_type}.log 2>&1 &
       popd
 	  #cd $OPENSHIFT_REPO_DIR
 	  #echo "Executing bundle install"
