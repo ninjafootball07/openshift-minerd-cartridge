@@ -36,8 +36,8 @@ Cart-Data:
     Type: environment
     Description: "Unique ID which identified the gear. This value changes between gears."
 Provides:
-  - cpuminer
-Subscribes:
+  - minerd
+Subscribed:
   set-env:
     Type: "ENV:*"
     Required: false
