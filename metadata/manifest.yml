@@ -2,7 +2,7 @@ Name: minerd
 Cartridge-Short-Name: MINERD
 Version: '0.1'
 Cartridge-Version: '0.0.1'
-Cartridge-Vendor: FooBar
+Cartridge-Vendor: foobar
 Source-Url: https://github.com/syntaxsugar/openshift-minerd-cartridge.git
 Cart-Data:
   - Key: OPENSHIFT_MINERD_LOG_DIR
