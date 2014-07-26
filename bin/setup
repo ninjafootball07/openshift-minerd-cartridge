@@ -1,0 +1,11 @@
+#!/bin/bash -eu
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+#env_dir=$OPENSHIFT_JEKYLL_DIR/env
+#dirname $(scl enable ruby193 "which ruby") > $env_dir/OPENSHIFT_RUBY_PATH_ELEMENT
+#ld_path=$(LD_LIBRARY_PATH="" scl enable ruby193 "printenv LD_LIBRARY_PATH")
+#set_env_var 'OPENSHIFT_RUBY_LD_LIBRARY_PATH_ELEMENT' $ld_path $env_dir
+#scl enable ruby193 "printenv MANPATH" > $env_dir/MANPATH
+
+mkdir -p $OPENSHIFT_MINERD_DIR/logs
