@@ -1,9 +1,11 @@
 #!/bin/bash -eu
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
-#JEKYLL_PID_FILE=${OPENSHIFT_HOMEDIR}/app-root/runtime/jekyll.pid
+
+MINERD_BIN_DIR=${OPENSHIFT_MINERD_DIR}/bin
 
 cartridge_type="minerd"
+version=2.4
 
 
 # Check if the wildfly process is running
@@ -21,20 +23,31 @@ function isrunning() {
 function start() {
   echo "Starting $cartridge_type cart"
 
-   #Check for running app
+  #Check for running app
   if isrunning; then
       echo "Application is already running"
   else
-	  cd $OPENSHIFT_REPO_DIR
-	  echo "Executing bundle install"
-	  echo "Starting MINERD server"
+      pushd ${OPENSHIFT_MINERD_DIR}/minerd
+      bin minerd --help
+      popd
+	  #cd $OPENSHIFT_REPO_DIR
+	  #echo "Executing bundle install"
+	  #echo "Starting MINERD server"
 
       #if ! ishttpup; then
       #    echo "Timed out waiting for http listening port"
       #    exit 1
       #fi
-	  exit 0
+	  #exit 0
   fi
+}
+
+function build() {
+    echo "Building CpuMiner"
+}
+
+function deploy() {
+    echo "building CpuMiner"
 }
 
 function stop() {
@@ -77,6 +90,8 @@ function tidy() {
 }
 
 case "$1" in
+  build)           build ;;
+  deploy)          deploy ;;
   start)           start ;;
   stop)            stop ;;
   restart)         restart ;;
