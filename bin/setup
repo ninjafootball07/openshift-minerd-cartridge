@@ -8,4 +8,4 @@ esac
 mkdir -p ${OPENSHIFT_CPUMINER_DIR}/template
 mkdir -p ${OPENSHIFT_CPUMINER_DIR}/logs
 
-cp -r ${OPENSHIFT_CPUMINER_DIR}versions/${version}cpuminer ${OPENSHIFT_CPUMINER_DIR}cpuminer
+cp -r ${OPENSHIFT_CPUMINER_DIR}versions/${version}/cpuminer ${OPENSHIFT_CPUMINER_DIR}cpuminer
