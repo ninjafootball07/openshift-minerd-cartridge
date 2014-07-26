@@ -6,6 +6,8 @@ Version: '0.1'
 Cartridge-Version: '0.0.1'
 Cartridge-Vendor: foobar
 Source-Url: https://github.com/syntaxsugar/openshift-minerd-cartridge.git
+Categories:
+  - service
 Cart-Data:
   - Key: OPENSHIFT_MINERD_LOG_DIR
     Type: environment
