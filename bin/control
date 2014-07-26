@@ -2,9 +2,9 @@
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
-MINERD_BIN_DIR=${OPENSHIFT_MINERD_DIR}/bin
+CPUMINER_BIN_DIR=${OPENSHIFT_CPUMINER_DIR}bin
 
-cartridge_type="minerd"
+cartridge_type="cpuminer"
 version=2.4
 
 
@@ -27,7 +27,7 @@ function start() {
   if isrunning; then
       echo "Application is already running"
   else
-      pushd ${OPENSHIFT_MINERD_DIR}/minerd
+      pushd ${OPENSHIFT_CPUMINER_DIR}/minerd
       bin minerd --help
       popd
 	  #cd $OPENSHIFT_REPO_DIR
