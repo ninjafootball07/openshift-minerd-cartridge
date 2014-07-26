@@ -8,6 +8,7 @@ Cartridge-Vendor: foobar
 Source-Url: https://github.com/syntaxsugar/openshift-minerd-cartridge.git
 Categories:
   - service
+  - embedded
 Cart-Data:
   - Key: OPENSHIFT_MINERD_LOG_DIR
     Type: environment
