@@ -12,12 +12,12 @@ version=2.4
 function isrunning() {
 
     # Check for running app
-	pid=$(ps -ef | grep "minerd" | awk '{print $2}')
-	if [ "$pid" != "" ]; then
+    pid=`pgrep -f "bin/minerd" 2> /dev/null`
+	if [ -n "$pid"]; then
 		return 0
-	else
-		return 1
 	fi
+
+    return 0
 }
 
 function start() {
@@ -54,9 +54,9 @@ function stop() {
   echo "Stopping $cartridge_type cart"
 
   if isrunning; then
-      pid=$(ps -ef | grep "minerd" | awk '{print $2}')
+      pid=`pgrep -f "bin/minerd" 2> /dev/null`
       echo "Sending SIGTERM to minerd:$pid ..." 1>&2
-      kill $pid
+      kill -TERM $pid > /dev/null 2>&1
   fi
 }
 
