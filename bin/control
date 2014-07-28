@@ -8,7 +8,7 @@ version=2.4
 function start() {
   echo "Starting $cartridge_type cart"
 
-  ${OPENSHIFT_CPUMINER_DIR}bin/minerd --benchmark >> ${OPENSHIFT_CPUMINER_LOG_DIR}minerd.log 2>&1 &
+  ${OPENSHIFT_CPUMINER_DIR}bin/minerd --config ${OPENSHIFT_DATA_DIR}.minerdrc >> ${OPENSHIFT_CPUMINER_LOG_DIR}minerd.log 2>&1 &
 }
 
 function stop() {
