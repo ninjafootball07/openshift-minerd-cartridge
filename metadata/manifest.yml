@@ -7,9 +7,9 @@ Cartridge-Version: '0.0.1'
 Cartridge-Vendor: foobar
 Source-Url: https://github.com/syntaxsugar/openshift-minerd-cartridge.git
 Categories:
-  - service
-  - embedded
   - web_framework
+  - instant_app
+  - embedded
 Cart-Data:
   - Key: OPENSHIFT_CPUMINER_LOG_DIR
     Type: environment
