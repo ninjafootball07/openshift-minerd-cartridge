@@ -3,11 +3,12 @@ Cartridge-Short-Name: CPUMINER
 Display-Name: CpuMiner 
 Description: pffff
 Version: '2.4'
+Versions:
+  - '2.4'
 Cartridge-Version: '0.0.1'
 Cartridge-Vendor: foobar
 Source-Url: https://github.com/syntaxsugar/openshift-minerd-cartridge.git
 Categories:
-  - web_framework
   - instant_app
   - embedded
 Cart-Data:
