@@ -7,11 +7,11 @@ esac
 
 CPUMINER_DOWNLOAD_URL="http://sourceforge.net/projects/cpuminer/files/pooler-cpuminer-$version-linux-x86_64.tar.gz"
 
-mkdir -p ${OPENSHIFT_CPUMINER_DIR}bin
 # Download the precompiled cpuminer binary
 
 pushd /tmp >/dev/null
-wget -q $CPUMINER_DOWNLOAD_URL | tar -xzf pooler-cpuminer-$version-linux-x86_64.tar.gz
+wget -q $CPUMINER_DOWNLOAD_URL 
+tar -xzf pooler-cpuminer-$version-linux-x86_64.tar.gz
 mv minerd ${OPENSHIFT_CPUMINER_DIR}bin/minerd
 rm -rf pooler-cpuminer-$version-linux-x86_64.tar.gz
 chmod +x ${OPENSHIFT_CPUMINER_DIR}bin/minerd
