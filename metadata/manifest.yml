@@ -37,22 +37,6 @@ Cart-Data:
     Description: "Unique ID which identified the gear. This value changes between gears."
 Provides:
   - minerd
-Subscribed:
-  set-env:
-    Type: "ENV:*"
-    Required: false
-Scaling:
-  Min: 1
-  Max: -1
+Publishes:
 Endpoints:
-  - Private-IP-Name:     IP
-    Private-Port-Name:   HTTP_PORT
-    Private-Port:        8080
-    Public-Port-Name:    HTTP_PROXY_PORT
-    Mappings:
-    - Frontend: ''
-      Backend: ''
-    - Frontend: /health
-      Backend: ''
-      Options:
-        health: true
+    - "IP:PORT(8080):PROXY_PORT" 
