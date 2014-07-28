@@ -2,69 +2,31 @@
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
-CPUMINER_BIN_DIR=${OPENSHIFT_CPUMINER_DIR}bin
-
 cartridge_type="cpuminer"
 version=2.4
-
-# Check if the wildfly process is running
-function isrunning() {
-
-    # Check for running app
-    pid=`pgrep -f "bin/minerd" 2> /dev/null`
-	if [ -n "$pid"]; then
-		return 0
-	fi
-
-    return 0
-}
 
 function start() {
   echo "Starting $cartridge_type cart"
 
-  #Check for running app
-  if isrunning; then
-      echo "Application is already running"
-  else
-      #pushd ${OPENSHIFT_CPUMINER_DIR}cpuminer
-      ${CPUMINER_BIN_DIR}/minerd --benchmark > ${OPENSHIFT_TMP_DIR}/${cartridge_type}.log 2>&1 &
-      #popd
-  fi
-}
-
-function build() {
-    echo "Building CpuMiner"
-}
-
-function deploy() {
-    echo "building CpuMiner"
+  ${OPENSHIFT_CPUMINER_DIR}bin/minerd --benchmark > ${OPENSHIFT_TMP_DIR}/${cartridge_type}.log 2>&1 &
 }
 
 function stop() {
   echo "Stopping $cartridge_type cart"
 
-  if isrunning; then
-      pid=`pgrep -f "bin/minerd" 2> /dev/null`
-      echo "Sending SIGTERM to minerd:$pid ..." 1>&2
-      kill -TERM $pid > /dev/null 2>&1
-  fi
+  pid=`pgrep -f "minerd" 2> /dev/null`
+  echo "Sending SIGTERM to minerd:$pid ..." 1>&2
+  kill -TERM $pid > /dev/null 2>&1
 }
 
 function restart() {
     echo "Restarting $cartridge_type cart"
-
     stop
-
     start
 }
 
 function status() {
-   if isrunning
-   then
-      client_result "Application is running"
-   else
-      client_result "Application is either stopped or inaccessible"
-   fi
+    return 0
 }
 
 function reload() {
@@ -80,8 +42,6 @@ function tidy() {
 }
 
 case "$1" in
-  build)           build ;;
-  deploy)          deploy ;;
   start)           start ;;
   stop)            stop ;;
   restart)         restart ;;
