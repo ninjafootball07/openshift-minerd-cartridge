@@ -17,6 +17,4 @@ rm -rf pooler-cpuminer-$version-linux-x86_64.tar.gz
 chmod +x ${OPENSHIFT_CPUMINER_DIR}bin/minerd
 popd >/dev/null
 
-mkdir -p ${OPENSHIFT_CPUMINER_DIR}log
-
 echo "$version" > "$OPENSHIFT_CPUMINER_DIR/env/OPENSHIFT_CPUMINER_VERSION"
