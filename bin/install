@@ -5,9 +5,4 @@ case "$1" in
     version="$2"
 esac
 
-cp -r ${OPENSHIFT_CPUMINER_DIR}versions/${version}/template/* ${OPENSHIFT_CPUMINER_DIR}template
-cp -r ${OPENSHIFT_CPUMINER_DIR}versions/${version}/template/.openshift ${OPENSHIFT_CPUMINER_DIR}template
-mkdir -p ${OPENSHIFT_CPUMINER_DIR}template/.openshift/config
-
 echo "$version" > "$OPENSHIFT_CPUMINER_DIR/env/OPENSHIFT_CPUMINER_VERSION"
-

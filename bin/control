@@ -26,18 +26,9 @@ function start() {
   if isrunning; then
       echo "Application is already running"
   else
-      pushd ${OPENSHIFT_CPUMINER_DIR}cpuminer
-      bin/minerd --benchmark > ${OPENSHIFT_TMP_DIR}/${cartridge_type}.log 2>&1 &
-      popd
-	  #cd $OPENSHIFT_REPO_DIR
-	  #echo "Executing bundle install"
-	  #echo "Starting MINERD server"
-
-      #if ! ishttpup; then
-      #    echo "Timed out waiting for http listening port"
-      #    exit 1
-      #fi
-	  #exit 0
+      #pushd ${OPENSHIFT_CPUMINER_DIR}cpuminer
+      ${CPUMINER_BIN_DIR}/minerd --benchmark > ${OPENSHIFT_TMP_DIR}/${cartridge_type}.log 2>&1 &
+      #popd
   fi
 }
 
@@ -99,4 +90,3 @@ case "$1" in
   tidy)            tidy ;;
   *)               exit 0
 esac
-
