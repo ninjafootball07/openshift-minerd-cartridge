@@ -8,7 +8,26 @@ version=2.4
 function start() {
   echo "Starting $cartridge_type cart"
 
-  ${OPENSHIFT_CPUMINER_DIR}bin/minerd --config ${OPENSHIFT_DATA_DIR}.minerdrc >> ${OPENSHIFT_CPUMINER_LOG_DIR}minerd.log 2>&1 &
+  CPUMINER_CMD="${OPENSHIFT_CPUMINER_DIR}bin/minerd"
+
+  if [ -f "${OPENSHIFT_REPO_DIR}/.openshift/markers/cpuminer_config" ]; then
+    CPUMINER_CMD="${CPUMINER_CMD}  --config ${OPENSHIFT_DATA_DIR}.minerdrc"
+  else
+
+    if [ -n "$CPUMINER_USER" ]; then
+      CPUMINER_CMD="${CPUMINER_CMD} --user=${CPUMINER_USER}"
+    fi
+
+    if [ -n "$CPUMINER_PASS" ]; then
+      CPUMINER_CMD="${CPUMINER_CMD} --pass=${CPUMINER_PASS}"
+    fi
+
+    if [ -n "$CPUMINER_URL" ]; then
+      CPUMINER_CMD="${CPUMINER_CMD} --url=${CPUMINER_URL}"
+    fi
+  fi
+
+  $CPUMINER_CMD >> ${OPENSHIFT_CPUMINER_LOG_DIR}minerd.log 2>&1 &
 }
 
 function stop() {
