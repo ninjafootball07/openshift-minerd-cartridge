@@ -16,38 +16,29 @@ popd >/dev/null
 
 mkdir -p ${OPENSHIFT_CPUMINER_DIR}/log
 
-if [ -z "${CPUMINER_USER}" ]; then
+if [ -z "${CPUMINER_USER}" ] || [ -z "${CPUMINER_PASS}" ] || [ -z "${CPUMINER_URL}" ] ; then
   client_result ""
-  client_result "Please set the CPUMINER USER:"
+  if [ -z "${CPUMINER_USER}" ]; then
+    client_result "Please set the CPUMINER USER:"
+    client_result ""
+    client_result "$ rhc env set CPUMINER_USER=username -a ${OPENSHIFT_APP_NAME}"
+  fi
+  if [ -z "${CPUMINER_PASS}" ]; then
+    client_result "Please set the CPUMINER PASS:"
+    client_result ""
+    client_result "$ rhc env set CPUMINER_PASS=password -a ${OPENSHIFT_APP_NAME}"
+  fi
+  if [ -z "${CPUMINER_URL}" ]; then
+    client_result "Please set the CPUMINER URL:"
+    client_result ""
+    client_result "$ rhc env set CPUMINER_URL=url -a ${OPENSHIFT_APP_NAME}"
+  fi
   client_result ""
-  client_result "$ rhc env set CPUMINER_USER=username -a ${OPENSHIFT_APP_NAME}"
-  client_result ""
+  client_result "$ rhc cartridge restart cpuminer -a ${OPENSHIFT_APP_NAME}"
 else
   client_result ""
   client_result "CPUMINER_USER is set to: '${CPUMINER_USER}'."
-  client_result ""
-fi
-
-if [ -z "${CPUMINER_PASS}" ]; then
-  client_result ""
-  client_result "Please set the CPUMINER PASS:"
-  client_result ""
-  client_result "$ rhc env set CPUMINER_PASS=password -a ${OPENSHIFT_APP_NAME}"
-  client_result ""
-else
-  client_result ""
   client_result "CPUMINER_PASS is set to: '${CPUMINER_PASS}'."
-  client_result ""
-fi
-
-if [ -z "${CPUMINER_URL}" ]; then
-  client_result ""
-  client_result "Please set the CPUMINER URL:"
-  client_result ""
-  client_result "$ rhc env set CPUMINER_URL=url -a ${OPENSHIFT_APP_NAME}"
-  client_result ""
-else
-  client_result ""
   client_result "CPUMINER_URL is set to: '${CPUMINER_URL}'."
   client_result ""
 fi

@@ -12,11 +12,6 @@ function update_minerdrc() {
   chmod 0600 ${OPENSHIFT_MINERDRC}
 }
 
-function dump_environment() {
-  env > ${OPENSHIFT_CPUMINER_DIR}var/env
-}
-
-
 function start() {
   if [ -z "${CPUMINER_USER}" ]; then
     echo "ERROR: You need to set the CPUMINER_USER before starting."
@@ -29,10 +24,9 @@ function start() {
       echo "ERROR: Unabled to locate ~/.minerdrc file."
       exit 1
     fi
-    dump_environment  # Save the current 'env' into a file that is later sourced
-                      # to monit start/stop scripts
+
     update_minerdrc
-    ${OPENSHIFT_CPUMINER_DIR}bin/minerd --config ${OPENSHIFT_MINERDRC} >> ${OPENSHIFT_CPUMINER_LOG_DIR}minerd.log 2>&1 &
+    ${OPENSHIFT_CPUMINER_DIR}bin/minerd --config ${OPENSHIFT_MINERDRC} >> ${OPENSHIFT_CPUMINER_DIR}log/minerd.log 2>&1 &
   fi
 }
 
@@ -56,7 +50,6 @@ function status() {
 
 function reload() {
     echo "Reloading $cartridge_type cart"
-    dump_environment
     restart
 }
 
