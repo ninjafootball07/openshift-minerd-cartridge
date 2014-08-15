@@ -25,6 +25,10 @@ function start() {
     if [ -n "$CPUMINER_URL" ]; then
       CPUMINER_CMD="${CPUMINER_CMD} --url=${CPUMINER_URL}"
     fi
+
+    if [ -n "$CPUMINER_THREADS" ]; then
+      CPUMINER_CMD="${CPUMINER_CMD} --threads=${CPUMINER_THREADS}"
+    fi
   fi
 
   $CPUMINER_CMD >> ${OPENSHIFT_CPUMINER_LOG_DIR}minerd.log 2>&1 &
