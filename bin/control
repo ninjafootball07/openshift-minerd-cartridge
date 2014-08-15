@@ -1,37 +1,39 @@
-#!/bin/bash -eu
+#!/bin/bash
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 cartridge_type="cpuminer"
 version=2.4
 
+OPENSHIFT_MINERDRC=${OPENSHIFT_DATA_DIR}.minerdrc
+
+function update_minerdrc() {
+  (cat ${OPENSHIFT_MINERDRC} | envsubst) > /tmp/minerdrc.tmp && mv /tmp/minerdrc.tmp ${OPENSHIFT_MINERDRC}
+  chmod 0600 ${OPENSHIFT_MINERDRC}
+}
+
+function dump_environment() {
+  env > ${OPENSHIFT_CPUMINER_DIR}var/env
+}
+
+
 function start() {
-  echo "Starting $cartridge_type cart"
-
-  CPUMINER_CMD="${OPENSHIFT_CPUMINER_DIR}bin/minerd"
-
-  if [ -f "${OPENSHIFT_REPO_DIR}/.openshift/markers/cpuminer_config" ]; then
-    CPUMINER_CMD="${CPUMINER_CMD}  --config ${OPENSHIFT_DATA_DIR}.minerdrc"
+  if [ -z "${CPUMINER_USER}" ]; then
+    echo "ERROR: You need to set the CPUMINER_USER before starting."
+    echo "       rhc env set CPUMINER_USER=username"
+    echo "       rhc cartridge restart cpuminer -a ${OPENSHIFT_APP_NAME}"
+    echo
   else
-
-    if [ -n "$CPUMINER_USER" ]; then
-      CPUMINER_CMD="${CPUMINER_CMD} --user=${CPUMINER_USER}"
+    echo "Starting cpuminer cartridge"
+    if [ ! -f ${OPENSHIFT_MINERDRC} ]; then
+      echo "ERROR: Unabled to locate ~/.minerdrc file."
+      exit 1
     fi
-
-    if [ -n "$CPUMINER_PASS" ]; then
-      CPUMINER_CMD="${CPUMINER_CMD} --pass=${CPUMINER_PASS}"
-    fi
-
-    if [ -n "$CPUMINER_URL" ]; then
-      CPUMINER_CMD="${CPUMINER_CMD} --url=${CPUMINER_URL}"
-    fi
-
-    if [ -n "$CPUMINER_THREADS" ]; then
-      CPUMINER_CMD="${CPUMINER_CMD} --threads=${CPUMINER_THREADS}"
-    fi
+    dump_environment  # Save the current 'env' into a file that is later sourced
+                      # to monit start/stop scripts
+    update_minerdrc
+    ${OPENSHIFT_CPUMINER_DIR}bin/minerd --config ${OPENSHIFT_MINERDRC} >> ${OPENSHIFT_CPUMINER_LOG_DIR}minerd.log 2>&1 &
   fi
-
-  $CPUMINER_CMD >> ${OPENSHIFT_CPUMINER_LOG_DIR}minerd.log 2>&1 &
 }
 
 function stop() {
@@ -54,6 +56,7 @@ function status() {
 
 function reload() {
     echo "Reloading $cartridge_type cart"
+    dump_environment
     restart
 }
 

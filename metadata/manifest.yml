@@ -1,12 +1,15 @@
 Name: cpuminer 
 Cartridge-Short-Name: CPUMINER
-Display-Name: CpuMiner 
+Architecture: x86_64
+Display-Name: CpuMiner 2.4
 Description: pffff
 Version: '2.4'
 Versions:
   - '2.4'
-Cartridge-Version: '0.0.2'
+Cartridge-Version: '0.0.3'
 Cartridge-Vendor: foobar
+License: GPL
+Vendor: foobar
 Source-Url: https://github.com/syntaxsugar/openshift-minerd-cartridge.git
 Categories:
   - service
